@@ -3,17 +3,18 @@ package dev.anthonynguyen.jee.controller;
 import dev.anthonynguyen.jee.entities.BarterItem;
 import dev.anthonynguyen.jee.entities.User;
 import dev.anthonynguyen.jee.services.DataService;
-import org.primefaces.PrimeFaces;
+import org.primefaces.event.RowEditEvent;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Optional;
 
 
 @Named
@@ -56,6 +57,14 @@ public class BarterViewController implements Serializable {
             this.currentUser = new User();
             this.currentUser.setFirst_name("Visiteur");
         }
+    }
+
+    public void goToDetails(int id) throws IOException {
+        getExternalContext().redirect(getExternalContext().getRequestContextPath() + "/item-details.xhtml?id=" + id);
+    }
+
+    private ExternalContext getExternalContext(){
+        return facesContext.getExternalContext();
     }
 
     public boolean checkIfAlreadyLoggedIn() {

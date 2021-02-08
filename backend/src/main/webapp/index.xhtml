@@ -14,7 +14,7 @@
 
         <div class="container h-100">
             <div class="mt-4">
-                <h1>SupinfoTroc</h1>
+                <h1 class="text-center">SupinfoTroc</h1>
                 <h3>Bienvenue sur SupinfoTroc, ${barterViewController.currentUser.first_name}.</h3>
                 <h4>Actuellement ${barterViewController.numberOfItems} objets en troc et
                     ${barterViewController.numberOfUsers} utilisateurs.
@@ -42,13 +42,9 @@
                                     </div>
                                 </div>
                                 <div class="mt-4">
-                                    <p:commandButton type="button"
-                                                     value="Contacter">
-                                    </p:commandButton>
-
-                                    <p:commandButton styleClass="p-ml-2" type="button"
-                                                     value="Voir plus">
-                                    </p:commandButton>
+                                    <p:commandButton value="Détails"
+                                                     actionListener="#{barterViewController.goToDetails(product.id)}"
+                                                     async="true" ajax="true" update="@form" />
                                 </div>
                             </div>
                         </p:dataViewListItem>

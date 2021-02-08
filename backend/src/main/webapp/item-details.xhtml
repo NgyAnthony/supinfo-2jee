@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <title>Détails</title>
+        <link rel="stylesheet" type="text/css" href="./resources/css/primeflex/primeflex.min.css"/>
+        <link href="./resources/css/bootstrap-5.0.0-beta1-dist/css/bootstrap.css" rel="stylesheet"/>
+    </h:head>
+    <h:body style="height: 100vh">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="d-flex justify-content-center">
+                    <div>
+                        <h1>SupinfoTroc</h1>
+                        <div class="card p-3" style="width: 23rem">
+                            <img class="card-img-top mx-auto"
+                                 src="${barterViewDetailsController.barterItem.image}"
+                                 style="max-width: 100%" alt=""/>
+                            <div class="card-body">
+                                <h5 class="card-title">${barterViewDetailsController.barterItem.title}</h5>
+                                <p class="card-subtitle mb-2 text-muted">Proposé par ${barterViewDetailsController.barterItem.user.first_name}
+                                    ${barterViewDetailsController.barterItem.user.last_name}</p>
+                                <p class="card-text">Situé dans le ${barterViewDetailsController.barterItem.user.zipcode}</p>
+
+                                <p class="card-text">${barterViewDetailsController.barterItem.details}</p>
+                                <p:link outcome="/index" value="Retourner à l'accueil" styleClass="card-link"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</f:view>
+</html>
