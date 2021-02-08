@@ -1,6 +1,7 @@
 package dev.anthonynguyen.jee.services;
 
 import dev.anthonynguyen.jee.entities.BarterItem;
+import dev.anthonynguyen.jee.entities.BarterItem_;
 import dev.anthonynguyen.jee.entities.User;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -150,6 +151,17 @@ public class DataService {
 
         TypedQuery<BarterItem> allQuery = em.createQuery(all);
         return allQuery.getResultList();
+    }
+
+    // [SearchQuery] Search barter items by title
+    public List<BarterItem> findBarterItemByName(String parameter) {
+        System.out.println("-- Employees name LIKE D% --");
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<BarterItem> query = cb.createQuery(BarterItem.class);
+        Root<BarterItem> employee = query.from(BarterItem.class);
+        query.select(employee)
+            .where(cb.like(employee.get(BarterItem_.TITLE),"%" + parameter +"%"));
+        return em.createQuery(query).getResultList();
     }
     //endregion
 }

@@ -83,5 +83,9 @@ public class BarterItem {
         this.image = image;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     //endregion
 }
