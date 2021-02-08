@@ -1,6 +1,7 @@
 package dev.anthonynguyen.jee.controller;
 
 import dev.anthonynguyen.jee.entities.User;
+import dev.anthonynguyen.jee.entities.UserRole;
 import dev.anthonynguyen.jee.services.DataService;
 
 import javax.annotation.PostConstruct;
@@ -33,21 +34,15 @@ public class ProfileController {
     public void initialize(){
         String username = securityContext.getCallerPrincipal().getName();
         this.currentUser = dataService.getUser(username);
-        // this.currentUser.ifPresent(user -> {
-        //     this.currentQualities  = dataService.getQualities(user);
-        // });
     }
 
     public User getCurrentUser(){
         return currentUser.orElse(null);
     }
 
-    // public List<Quality> getCurrentQualities() {
-    //     return currentQualities;
-    // }
-
-    public boolean isAllowedToSeeUsers(){
-        return securityContext.isCallerInRole("admin");
+    public boolean isAdmin(){
+        System.out.println(securityContext.isCallerInRole(UserRole.admin.toString()));
+        return securityContext.isCallerInRole(UserRole.admin.toString());
     }
 
     public String logout() throws ServletException{

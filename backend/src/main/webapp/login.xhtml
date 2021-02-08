@@ -6,30 +6,38 @@
       xmlns:p="http://primefaces.org/ui">
 <f:view>
     <h:head>
-        <title>Login Page</title>
+        <title>Se login</title>
+        <link rel="stylesheet" type="text/css" href="./resources/css/primeflex/primeflex.min.css"/>
+        <link href="./resources/css/bootstrap-5.0.0-beta1-dist/css/bootstrap.css" rel="stylesheet"/>
     </h:head>
-    <h:body>
-        <p:outputPanel>
-            <div class="ui-g">
-                <div class="ui-g-4">
-                    <h3 style="text-align: center;">Login with your credentials</h3>
+    <h:body style="height: 100vh">
+        <div class="container h-100">
+            <div class="row h-100 justify-content-center align-items-center">
+                <div style="text-align: center;" >
+                    <img src="resources/images/supinfo-logo-2020-quadri-png.png" alt="Logo Supinfo" width="200px"/>
+                    <h3>Bienvenue sur le site de troc Supinfo.</h3>
                     <h:form id="login">
                         <p:messages id="messages" globalOnly="true"/>
-                        <h:panelGrid columns="3" cellpadding="3" style="margin: 0 auto;">
-                            <p:outputLabel for="username" value="Username"/>
+                        <h:panelGrid columns="3" cellpadding="3" class="mx-auto">
+                            <p:outputLabel for="username" value="Nom d'utilisateur"/>
                             <p:inputText id="username" value="#{loginController.username}"/>
                             <p:message for="username"/>
 
-                            <p:outputLabel for="password" value="Password"/>
+                            <p:outputLabel for="password" value="Mot de passe"/>
                             <p:inputText id="password" value="#{loginController.password}" type="password"/>
                             <p:message for="password"/>
 
-                            <p:commandButton id="submit" update="@form" value="Login" action="#{loginController.execute}" ajax="false"/>
+                            <p:link outcome="index" value="Retourner à l'accueil">
+                            </p:link>
+
+                            <p:commandButton id="submit" update="@form" value="Se connecter"
+                                             action="#{loginController.execute}" ajax="false"/>
+
                         </h:panelGrid>
                     </h:form>
                 </div>
             </div>
-        </p:outputPanel>
+        </div>
     </h:body>
 </f:view>
 

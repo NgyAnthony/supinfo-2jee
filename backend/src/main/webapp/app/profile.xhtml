@@ -6,18 +6,29 @@
       xmlns:p="http://primefaces.org/ui">
 <f:view>
     <h:head>
-        <title>User Profile</title>
+        <title>Profil</title>
+        <link rel="stylesheet" type="text/css" href="../resources/css/primeflex/primeflex.min.css"/>
+        <link href="../resources/css/bootstrap-5.0.0-beta1-dist/css/bootstrap.css" rel="stylesheet"/>
     </h:head>
-    <h:body>
-        <h3>This is your user profile!</h3>
-        <p:panel>
-            <f:facet name="footer">
-                <h:form>
-                    <p:commandButton value="All Users" action="users?faces-redirect=true" rendered="#{profileController.allowedToSeeUsers}"/>
-                    <p:commandButton value="Logout" action="#{profileController.logout}"/>
-                </h:form>
-            </f:facet>
-        </p:panel>
+    <h:body style="height: 100vh">
+        <div class="container h-100">
+            <div class="row h-100 justify-content-center align-items-center">
+                <div>
+                    <h3>Bonjour ${profileController.currentUser.first_name} 👋</h3>
+                    <p:panel style="width: 100%">
+                        <p>Nom d'utilisateur: ${profileController.currentUser.username}</p>
+                        <p>Email: ${profileController.currentUser.email}</p>
+                        <p>Code postal: ${profileController.currentUser.zipcode}</p>
+
+                        <h:form style="text-align: right">
+                            <p:link outcome="barterCrud" value="Gérer mes objets" styleClass="p-mr-5">
+                            </p:link>
+                            <p:commandButton value="Se déconnecter 🚪" action="#{profileController.logout}"/>
+                        </h:form>
+                    </p:panel>
+                </div>
+            </div>
+        </div>
     </h:body>
 </f:view>
 </html>

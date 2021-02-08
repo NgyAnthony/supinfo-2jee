@@ -1,6 +1,7 @@
 package dev.anthonynguyen.jee.services;
 
 import dev.anthonynguyen.jee.entities.User;
+import dev.anthonynguyen.jee.entities.UserRole;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Initialized;
@@ -15,8 +16,10 @@ public class DataInitializer {
 
     public void execute(@Observes @Initialized(ApplicationScoped.class) Object event){
         if(dataService.getAllUsers().isEmpty()){
-            User admin = dataService.createUser("Sally Addams", "admin", "admin", "admin");
-            User user = dataService.createUser("Tom Matthews", "user", "user", "user");
+            User admin = dataService.createUser("Sally", "Addams", "admin", "admin",
+                UserRole.admin.toString(), "sally@gmail.com", "69001");
+            User user = dataService.createUser("Tom", "Matthews", "user", "user",
+                UserRole.user.toString(), "tom@gmail.com", "69002");
         }
     }
 }

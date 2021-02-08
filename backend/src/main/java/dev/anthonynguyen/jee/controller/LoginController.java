@@ -1,7 +1,5 @@
 package dev.anthonynguyen.jee.controller;
 
-import sun.security.util.Debug;
-
 import java.io.IOException;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -65,7 +63,6 @@ public class LoginController {
 
     private AuthenticationStatus processAuthentication(){
         ExternalContext ec = getExternalContext();
-        System.out.println("GOT HERE !");
         return securityContext.authenticate((HttpServletRequest)ec.getRequest(),
             (HttpServletResponse)ec.getResponse(),
             AuthenticationParameters.withParams().credential(new UsernamePasswordCredential(username, password)));

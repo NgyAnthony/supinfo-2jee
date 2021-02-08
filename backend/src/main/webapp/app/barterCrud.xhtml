@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <title>Gérer mes objets</title>
+        <link rel="stylesheet" type="text/css" href="../resources/css/primeflex/primeflex.min.css"/>
+        <link href="../resources/css/bootstrap-5.0.0-beta1-dist/css/bootstrap.css" rel="stylesheet"/>
+        <h:outputStylesheet library="webjars" name="font-awesome/5.8.2/css/all.min-jsf.css" />
+        <h:outputStylesheet library="webjars" name="font-awesome/5.8.2/css/v4-shims.min-jsf.css" />
+    </h:head>
+    <h:body>
+        <div class="container mt-5">
+
+            <h:form id="form">
+                <p:growl id="msgs" showDetail="true"/>
+                <div class="card p-3">
+                    <h5>Gérer mes objets</h5>
+                    <p:link outcome="/index" value="Retourner à l'accueil">
+                    </p:link>
+
+                    <p:link outcome="profile" value="Retourner à mon profil">
+                    </p:link>
+                    <hr/>
+                    <h:form id="addItem">
+                        <p:messages id="messages" globalOnly="true"/>
+                        <h:panelGrid columns="3" cellpadding="3">
+                            <p:outputLabel for="title" value="Titre"/>
+                            <p:inputText id="title" value="#{barterCrudController.title}"/>
+                            <p:message for="title"/>
+
+                            <p:outputLabel for="details" value="Détails"/>
+                            <p:inputText id="details" value="#{barterCrudController.details}"/>
+                            <p:message for="details"/>
+
+                            <p:outputLabel for="image" value="Image"/>
+                            <p:inputText id="image" value="#{barterCrudController.image}"/>
+                            <p:message for="image"/>
+
+                            <p:commandButton id="submit" update="@form" value="Ajouter"
+                                             action="#{barterCrudController.addBarterItem}" ajax="false"/>
+
+                        </h:panelGrid>
+                    </h:form>
+                    <hr/>
+
+
+                    <p:dataTable id="items" var="item" value="#{barterCrudController.allBarterItemsOwned}" editable="true"
+                                 style="margin-bottom:20px">
+
+                        <p:ajax event="rowEdit" listener="#{barterCrudController.onRowEdit}" update=":form:msgs"/>
+                        <p:ajax event="rowEditCancel" listener="#{barterCrudController.onRowCancel}" update=":form:msgs"/>
+
+                        <p:column headerText="Titre">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{item.title}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{item.title}" style="width:100%" label="Titre"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Détails">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{item.details}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{item.details}" style="width:100%" label="Détails"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Image">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{item.image}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{item.image}" style="width:100%" label="Image"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column style="width:6rem">
+                            <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+
+                            <p:commandButton class="ui-button-warning rounded-button"
+                                             icon="fas fa-trash"
+                                             action="#{barterCrudController.deleteBarterItem(item)}">
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </h:form>
+        </div>
+    </h:body>
+</f:view>
+</html>
