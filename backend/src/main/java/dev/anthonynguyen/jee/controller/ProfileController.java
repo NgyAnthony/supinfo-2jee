@@ -1,5 +1,6 @@
 package dev.anthonynguyen.jee.controller;
 
+import dev.anthonynguyen.jee.entities.BarterItem;
 import dev.anthonynguyen.jee.entities.User;
 import dev.anthonynguyen.jee.entities.UserRole;
 import dev.anthonynguyen.jee.services.DataService;
@@ -13,6 +14,7 @@ import javax.inject.Named;
 import javax.security.enterprise.SecurityContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.Optional;
 
 @RequestScoped
@@ -36,6 +38,11 @@ public class ProfileController {
         this.currentUser = dataService.getUser(username);
     }
 
+    public void reload() throws IOException {
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+    }
+
     public User getCurrentUser(){
         return currentUser.orElse(null);
     }
@@ -50,4 +57,10 @@ public class ProfileController {
         ((HttpServletRequest)ec.getRequest()).logout();
         return "/login.xhtml?faces-redirect=true";
     }
+
+    public void updateUser(User user) throws IOException {
+        dataService.updateUser(user);
+        reload();
+    }
+
 }

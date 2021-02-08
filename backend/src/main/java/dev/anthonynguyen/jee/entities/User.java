@@ -89,4 +89,36 @@ public class User implements Serializable {
         return zipcode;
     }
     //endregion
+
+    //region Setters
+
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    //endregion
 }

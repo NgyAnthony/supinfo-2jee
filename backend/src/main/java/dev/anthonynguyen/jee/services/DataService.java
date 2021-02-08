@@ -47,6 +47,12 @@ public class DataService {
         return newUser;
     }
 
+    // [BarterCrudController] Update a user
+    @Transactional
+    public void updateUser(User user) {
+        em.merge(user);
+    }
+
     public Optional<User> getUser(String username){
         return em.createNamedQuery("User.byUsername", User.class)
             .setParameter("username", username)

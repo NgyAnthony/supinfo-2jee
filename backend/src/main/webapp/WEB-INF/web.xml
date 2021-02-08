@@ -43,6 +43,11 @@
 
     <security-constraint>
         <display-name>User Role</display-name>
+
+        <web-resource-collection>
+            <web-resource-name>Login page</web-resource-name>
+            <url-pattern>/app/barterCrud.xhtml</url-pattern>
+        </web-resource-collection>
         <web-resource-collection>
             <web-resource-name>Login page</web-resource-name>
             <url-pattern>/app/profile.xhtml</url-pattern>

@@ -16,14 +16,47 @@
                 <div>
                     <h3>Bonjour ${profileController.currentUser.first_name} 👋</h3>
                     <p:panel style="width: 100%">
-                        <p>Nom d'utilisateur: ${profileController.currentUser.username}</p>
-                        <p>Email: ${profileController.currentUser.email}</p>
-                        <p>Code postal: ${profileController.currentUser.zipcode}</p>
+                        <h4>Mon profil</h4>
+                        <h:form id="user"  style="text-align: right">
+                            <p:messages id="messages" globalOnly="true"/>
+                            <h:panelGrid columns="3" cellpadding="3">
+                                <p:outputLabel for="first_name" value="Prénom: "/>
+                                <p:inputText id="first_name" value="#{profileController.currentUser.first_name}"/>
+                                <p:message for="first_name"/>
 
-                        <h:form style="text-align: right">
-                            <p:link outcome="barterCrud" value="Gérer mes objets" styleClass="p-mr-5">
-                            </p:link>
-                            <p:commandButton value="Se déconnecter 🚪" action="#{profileController.logout}"/>
+                                <p:outputLabel for="last_name" value="Nom: "/>
+                                <p:inputText id="last_name" value="#{profileController.currentUser.last_name}"/>
+                                <p:message for="last_name"/>
+
+                                <p:outputLabel for="username" value="Nom d'utilisateur: "/>
+                                <p:inputText
+                                    styleClass="bg-light text-muted"
+                                    readonly="true" id="username" value="#{profileController.currentUser.username}"/>
+                                <p:message for="username"/>
+
+                                <p:outputLabel for="email" value="Email: "/>
+                                <p:inputText
+                                    styleClass="bg-light text-muted"
+                                    readonly="true"
+                                    id="email" value="#{profileController.currentUser.email}"/>
+                                <p:message for="email"/>
+
+                                <p:outputLabel for="zipcode" value="Code postal: "/>
+                                <p:inputText id="zipcode" value="#{profileController.currentUser.zipcode}"/>
+                                <p:message for="zipcode"/>
+
+                            </h:panelGrid>
+                            <div class="p-d-flex justify-content-between">
+                                <div>
+                                    <p:commandButton value="Sauvegarder"
+                                                     action="#{profileController.updateUser(profileController.currentUser)}"/>
+                                </div>
+                                <div>
+                                    <p:link outcome="barterCrud" value="Gérer mes objets" styleClass="p-mr-5">
+                                    </p:link>
+                                    <p:commandButton value="Se déconnecter 🚪" action="#{profileController.logout}"/>
+                                </div>
+                            </div>
                         </h:form>
                     </p:panel>
                 </div>

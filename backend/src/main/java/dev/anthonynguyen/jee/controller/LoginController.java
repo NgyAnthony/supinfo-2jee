@@ -1,6 +1,11 @@
 package dev.anthonynguyen.jee.controller;
 
+import dev.anthonynguyen.jee.entities.User;
+import dev.anthonynguyen.jee.services.DataService;
+
 import java.io.IOException;
+import java.util.Optional;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -31,6 +36,13 @@ public class LoginController {
     @Inject
     SecurityContext securityContext;
 
+    @PostConstruct
+    public void checkIfAlreadyLoggedIn() throws IOException {
+        if(facesContext.getExternalContext().getRemoteUser() != null){
+            toProfile();
+        }
+    }
+
     public String getUsername() {
         return username;
     }
@@ -46,7 +58,9 @@ public class LoginController {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    public void toProfile() throws IOException {
+        getExternalContext().redirect(getExternalContext().getRequestContextPath() + "/app/profile.xhtml");
+    }
     public void execute() throws IOException{
         switch(processAuthentication()){
             case SEND_CONTINUE:
@@ -56,7 +70,7 @@ public class LoginController {
                 facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid Credentials", null));
                 break;
             case SUCCESS:
-                getExternalContext().redirect(getExternalContext().getRequestContextPath() + "/app/profile.xhtml");
+                toProfile();
                 break;
         }
     }

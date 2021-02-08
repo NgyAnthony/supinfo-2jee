@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
 <f:view>
     <h:head>
-        <title>Se connecter</title>
+        <title>Se login</title>
         <link rel="stylesheet" type="text/css" href="./resources/css/primeflex/primeflex.min.css"/>
         <link href="./resources/css/bootstrap-5.0.0-beta1-dist/css/bootstrap.css" rel="stylesheet"/>
     </h:head>
@@ -15,17 +15,33 @@
             <div class="row h-100 justify-content-center align-items-center">
                 <div style="text-align: center;" >
                     <img src="resources/images/supinfo-logo-2020-quadri-png.png" alt="Logo Supinfo" width="200px"/>
-                    <h3>Bienvenue sur le SupinfoTroc</h3>
+                    <h3>S'inscrire à SupinfoTroc</h3>
                     <h:form id="login">
                         <p:messages id="messages" globalOnly="true"/>
                         <h:panelGrid columns="3" cellpadding="3" class="mx-auto">
                             <p:outputLabel for="username" value="Nom d'utilisateur"/>
-                            <p:inputText id="username" value="#{loginController.username}"/>
+                            <p:inputText id="username" value="#{registerController.username}"/>
                             <p:message for="username"/>
 
                             <p:outputLabel for="password" value="Mot de passe"/>
-                            <p:inputText id="password" value="#{loginController.password}" type="password"/>
+                            <p:inputText id="password" value="#{registerController.password}" type="password"/>
                             <p:message for="password"/>
+
+                            <p:outputLabel for="first_name" value="Prénom"/>
+                            <p:inputText id="first_name" value="#{registerController.first_name}"/>
+                            <p:message for="first_name"/>
+
+                            <p:outputLabel for="last_name" value="Nom"/>
+                            <p:inputText id="last_name" value="#{registerController.last_name}"/>
+                            <p:message for="last_name"/>
+
+                            <p:outputLabel for="zipcode" value="Code postal"/>
+                            <p:inputText id="zipcode" value="#{registerController.zipcode}"/>
+                            <p:message for="zipcode"/>
+
+                            <p:outputLabel for="email" value="Email"/>
+                            <p:inputText id="email" value="#{registerController.email}"/>
+                            <p:message for="email"/>
 
                             <p:link outcome="index" value="Retourner à l'accueil">
                             </p:link>
@@ -33,10 +49,10 @@
 
                         </h:panelGrid>
 
-                        <p:link outcome="register" value="S'enregistrer" styleClass="p-mr-3">
+                        <p:link outcome="login" value="Se connecter" styleClass="p-mr-3">
                         </p:link>
-                        <p:commandButton id="submit" update="@form" value="Se connecter"
-                                         action="#{loginController.execute}" ajax="false"/>
+                        <p:commandButton id="submit" update="@form" value="S'enregistrer"
+                                         action="#{registerController.execute}" ajax="false"/>
                     </h:form>
                 </div>
             </div>
