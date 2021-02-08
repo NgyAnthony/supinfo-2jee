@@ -37,10 +37,14 @@ public class LoginController {
     SecurityContext securityContext;
 
     @PostConstruct
-    public void checkIfAlreadyLoggedIn() throws IOException {
-        if(facesContext.getExternalContext().getRemoteUser() != null){
+    public void redirectIfLoggedIn() throws IOException {
+        if(checkIfAlreadyLoggedIn()){
             toProfile();
         }
+    }
+
+    public boolean checkIfAlreadyLoggedIn() {
+        return facesContext.getExternalContext().getRemoteUser() != null;
     }
 
     public String getUsername() {

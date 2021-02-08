@@ -36,11 +36,6 @@ public class BarterItem {
     public BarterItem() {
     }
 
-    public BarterItem(String title, String details) {
-        this.title = title;
-        this.details = details;
-    }
-
     public BarterItem(String title, String details, String image, User user) {
         this.title = title;
         this.details = details;
@@ -63,7 +58,15 @@ public class BarterItem {
     }
 
     public String getImage() {
-        return image;
+        if(image.isEmpty()){
+            return "./resources/images/box.png";
+        } else {
+            return image;
+        }
+    }
+
+    public User getUser() {
+        return user;
     }
     //endregion
 
@@ -79,5 +82,6 @@ public class BarterItem {
     public void setImage(String image) {
         this.image = image;
     }
+
     //endregion
 }

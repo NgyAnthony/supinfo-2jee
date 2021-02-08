@@ -15,7 +15,9 @@
             <div class="row h-100 justify-content-center align-items-center">
                 <div>
                     <h3>Bonjour ${profileController.currentUser.first_name} 👋</h3>
-                    <p:panel style="width: 100%">
+
+                    <p:link outcome="/index" value="Retourner à l'accueil"/>
+                    <p:panel style="width: 100%; margin-top: 2em;">
                         <h4>Mon profil</h4>
                         <h:form id="user"  style="text-align: right">
                             <p:messages id="messages" globalOnly="true"/>

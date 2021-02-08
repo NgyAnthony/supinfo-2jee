@@ -37,6 +37,16 @@ public class DataService {
         return allQuery.getResultList();
     }
 
+    public Long getUserCount(){
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+
+        // Get the total number of entities
+        CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
+        countQuery.select(criteriaBuilder.count(countQuery.from(User.class)));
+
+        return em.createQuery(countQuery).getSingleResult();
+    }
+
     @Transactional
     public User createUser(String first_name, String last_name, String username, String password,
                            String group, String email, String zipcode){
@@ -97,15 +107,21 @@ public class DataService {
         return em.find(BarterItem.class, id);
     }
 
-    // [IndexController] Pagination query
-    public List<BarterItem> getBarterItemPaged(Integer pageNumber, Integer pageSize) {
-        //https://www.baeldung.com/jpa-pagination
+    public Long getBarterItemCount(){
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
         // Get the total number of entities
         CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
         countQuery.select(criteriaBuilder.count(countQuery.from(BarterItem.class)));
-        Long count = em.createQuery(countQuery).getSingleResult();
+
+        return em.createQuery(countQuery).getSingleResult();
+    }
+
+    // [IndexController] Pagination query
+    public List<BarterItem> getBarterItemPaged(Integer pageNumber, Integer pageSize) {
+        //https://www.baeldung.com/jpa-pagination
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        Long count = getBarterItemCount();
 
         // Selecting the class used by the criteria query
         CriteriaQuery<BarterItem> criteriaQuery = criteriaBuilder.createQuery(BarterItem.class);
@@ -122,6 +138,18 @@ public class DataService {
         }
 
         return typedQuery.getResultList();
+    }
+
+    // [IndexController] All barter items query
+    public List<BarterItem> getAllBarterItems() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+
+        CriteriaQuery<BarterItem> cq = cb.createQuery(BarterItem.class);
+        Root<BarterItem> rootEntry = cq.from(BarterItem.class);
+        CriteriaQuery<BarterItem> all = cq.select(rootEntry);
+
+        TypedQuery<BarterItem> allQuery = em.createQuery(all);
+        return allQuery.getResultList();
     }
     //endregion
 }

@@ -12,8 +12,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.SystemException;
-import javax.validation.constraints.NotEmpty;
 import java.io.IOException;
 import java.util.List;
 

@@ -10,8 +10,52 @@
         <link rel="stylesheet" type="text/css" href="./resources/css/primeflex/primeflex.min.css"/>
         <link href="./resources/css/bootstrap-5.0.0-beta1-dist/css/bootstrap.css" rel="stylesheet"/>
     </h:head>
-    <h:body>
-        <h3>Hello</h3>
+    <h:body style="height: 100vh">
+
+        <div class="container h-100">
+            <div class="mt-4">
+                <h1>SupinfoTroc</h1>
+                <h3>Bienvenue sur SupinfoTroc, ${barterViewController.currentUser.first_name}.</h3>
+                <h4>Actuellement ${barterViewController.numberOfItems} objets en troc et
+                    ${barterViewController.numberOfUsers} utilisateurs.
+                </h4>
+
+                <p:link outcome="app/profile" value="Mon profil"/>
+            </div>
+
+            <div class="m-3">
+                <h:form id="form">
+                    <p:dataView var="product" value="#{barterViewController.barterItems}" rows="3" paginator="true"
+                                rowsPerPageTemplate="3, 6, 9"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+
+                        <p:dataViewListItem>
+                            <div class="d-flex justify-content-between">
+                                <div class="mt-4 d-flex">
+                                    <img src="#{product.image}" style="max-height: 167px" alt=""/>
+                                    <div class="p-ml-4">
+                                        <h:outputText value="#{product.title}">
+                                        </h:outputText><br/>
+                                        <h:outputText value="Proposé par #{product.user.first_name}">
+                                        </h:outputText>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <p:commandButton type="button"
+                                                     value="Contacter">
+                                    </p:commandButton>
+
+                                    <p:commandButton styleClass="p-ml-2" type="button"
+                                                     value="Voir plus">
+                                    </p:commandButton>
+                                </div>
+                            </div>
+                        </p:dataViewListItem>
+                    </p:dataView>
+                </h:form>
+            </div>
+        </div>
     </h:body>
 </f:view>
 </html>
