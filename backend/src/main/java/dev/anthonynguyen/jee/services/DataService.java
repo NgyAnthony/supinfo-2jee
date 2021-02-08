@@ -12,7 +12,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
-import javax.transaction.SystemException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -75,8 +74,21 @@ public class DataService {
     }
 
     // [BarterCrudController] Update a barter item
+    @Transactional
     public void updateBarterItem(BarterItem item) {
         em.merge(item);
+    }
+
+    // [BarterCrudController] Delete a barter item
+    @Transactional
+    public void deleteBarterItem(BarterItem item) {
+        em.remove(em.contains(item) ? item : em.merge(item));
+    }
+
+    // [BarterDetailsController] Find a barter item by ID
+    @Transactional
+    public BarterItem getBarterItem(Integer id){
+        return em.find(BarterItem.class, id);
     }
 
     // [IndexController] Pagination query
@@ -104,15 +116,6 @@ public class DataService {
         }
 
         return typedQuery.getResultList();
-    }
-
-    // [BarterDetailsController] Find a barter item by ID
-    public BarterItem getBarterItem(Integer id){
-        return em.find(BarterItem.class, id);
-    }
-
-    public void deleteBarterItem(BarterItem item) {
-        em.remove(em.contains(item) ? item : em.merge(item));
     }
     //endregion
 }

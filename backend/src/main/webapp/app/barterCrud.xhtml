@@ -18,13 +18,15 @@
             <h:form id="form">
                 <p:growl id="msgs" showDetail="true"/>
                 <div class="card p-3">
-                    <h5>Gérer mes objets</h5>
+                    <h3>Gestion d'objets 🖼️</h3>
                     <p:link outcome="/index" value="Retourner à l'accueil">
                     </p:link>
 
                     <p:link outcome="profile" value="Retourner à mon profil">
                     </p:link>
                     <hr/>
+                    <h5>Ajouter un objet</h5>
+
                     <h:form id="addItem">
                         <p:messages id="messages" globalOnly="true"/>
                         <h:panelGrid columns="3" cellpadding="3">
@@ -46,7 +48,7 @@
                         </h:panelGrid>
                     </h:form>
                     <hr/>
-
+                    <h5>Mes objets</h5>
 
                     <p:dataTable id="items" var="item" value="#{barterCrudController.allBarterItemsOwned}" editable="true"
                                  style="margin-bottom:20px">
