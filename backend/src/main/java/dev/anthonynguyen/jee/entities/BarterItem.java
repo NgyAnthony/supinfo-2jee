@@ -87,5 +87,9 @@ public class BarterItem {
         this.user = user;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     //endregion
 }

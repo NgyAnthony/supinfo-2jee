@@ -25,6 +25,16 @@
 
             <div class="m-3">
                 <h:form id="form">
+                    <div class="mb-3 p-text-right">
+                        <p:outputLabel styleClass="p-mr-2" value="Rechercher (par objet)" for="@next"/>
+                        <p:autoComplete value="#{searchItemController.itemObj}"
+                                        completeMethod="#{searchItemController.completeText}"
+                                        id="basicPojo"
+                                        var="p" itemLabel="#{p.title}" itemValue="#{p}" converter="barterItemConverter" forceSelection="true">
+                            <p:ajax event="itemSelect" listener="#{searchItemController.onItemSelect}"/>
+                        </p:autoComplete>
+                    </div>
+
                     <p:dataView var="product" value="#{barterViewController.barterItems}" rows="3" paginator="true"
                                 rowsPerPageTemplate="3, 6, 9"
                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"

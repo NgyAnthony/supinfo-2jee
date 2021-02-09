@@ -3,10 +3,8 @@ package dev.anthonynguyen.jee.controller;
 import dev.anthonynguyen.jee.entities.BarterItem;
 import dev.anthonynguyen.jee.entities.User;
 import dev.anthonynguyen.jee.services.DataService;
-import org.primefaces.event.RowEditEvent;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
